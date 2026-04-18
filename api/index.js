@@ -1,7 +1,3 @@
-export const config = {
-  runtime: 'edge', // This ensures `request` is a Web Standard Request
-};
-
 import server from "../dist/server/server.js";
 
 export default async function handler(request) {
