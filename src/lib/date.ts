@@ -40,9 +40,7 @@ export function todayBST(): string {
 
 /** Get the current Date object adjusted for display purposes */
 export function nowBST(): Date {
-  return new Date(
-    new Date().toLocaleString("en-US", { timeZone: BST_TIMEZONE })
-  );
+  return new Date(new Date().toLocaleString("en-US", { timeZone: BST_TIMEZONE }));
 }
 
 /** Formats a raw time string (e.g. 19:57:48.910923) into 12-hour "7:57 PM" format */

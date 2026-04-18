@@ -11,17 +11,27 @@ const DEMO_USERS = [
   {
     userId: "STU001",
     password: "student123",
-    profile: { name: "Ananya Das", role: "student" as const, student_id: "STU001", roll_number: 1 },
+    profile: { name: "Asif Ahmed", role: "student" as const, student_id: "STU001", roll_number: 1 },
   },
   {
     userId: "STU002",
     password: "student123",
-    profile: { name: "Rahim Ahmed", role: "student" as const, student_id: "STU002", roll_number: 2 },
+    profile: {
+      name: "Rahim Ahmed",
+      role: "student" as const,
+      student_id: "STU002",
+      roll_number: 2,
+    },
   },
   {
     userId: "STU003",
     password: "student123",
-    profile: { name: "Fatema Khatun", role: "student" as const, student_id: "STU003", roll_number: 3 },
+    profile: {
+      name: "Fatema Khatun",
+      role: "student" as const,
+      student_id: "STU003",
+      roll_number: 3,
+    },
   },
   {
     userId: "STU004",
@@ -31,17 +41,32 @@ const DEMO_USERS = [
   {
     userId: "STU005",
     password: "student123",
-    profile: { name: "Priya Sharma", role: "student" as const, student_id: "STU005", roll_number: 5 },
+    profile: {
+      name: "Priya Sharma",
+      role: "student" as const,
+      student_id: "STU005",
+      roll_number: 5,
+    },
   },
   {
     userId: "STU006",
     password: "student123",
-    profile: { name: "Kamal Hossain", role: "student" as const, student_id: "STU006", roll_number: 6 },
+    profile: {
+      name: "Kamal Hossain",
+      role: "student" as const,
+      student_id: "STU006",
+      roll_number: 6,
+    },
   },
   {
     userId: "STU007",
     password: "student123",
-    profile: { name: "Nusrat Jahan", role: "student" as const, student_id: "STU007", roll_number: 7 },
+    profile: {
+      name: "Nusrat Jahan",
+      role: "student" as const,
+      student_id: "STU007",
+      roll_number: 7,
+    },
   },
   {
     userId: "STU008",
@@ -51,12 +76,22 @@ const DEMO_USERS = [
   {
     userId: "STU009",
     password: "student123",
-    profile: { name: "Mithila Roy", role: "student" as const, student_id: "STU009", roll_number: 9 },
+    profile: {
+      name: "Mithila Roy",
+      role: "student" as const,
+      student_id: "STU009",
+      roll_number: 9,
+    },
   },
   {
     userId: "STU010",
     password: "student123",
-    profile: { name: "Tanvir Hasan", role: "student" as const, student_id: "STU010", roll_number: 10 },
+    profile: {
+      name: "Tanvir Hasan",
+      role: "student" as const,
+      student_id: "STU010",
+      roll_number: 10,
+    },
   },
   {
     userId: "TCH001",
@@ -71,7 +106,9 @@ const DEMO_USERS = [
 ];
 
 function SeedPage() {
-  const [results, setResults] = useState<{ userId: string; status: "pending" | "success" | "error"; message?: string }[]>([]);
+  const [results, setResults] = useState<
+    { userId: string; status: "pending" | "success" | "error"; message?: string }[]
+  >([]);
   const [running, setRunning] = useState(false);
   const [done, setDone] = useState(false);
 
@@ -83,13 +120,11 @@ function SeedPage() {
       const u = DEMO_USERS[i];
       try {
         await signUp(u.userId, u.password, u.profile);
-        setResults((prev) =>
-          prev.map((r, j) => (j === i ? { ...r, status: "success" } : r))
-        );
+        setResults((prev) => prev.map((r, j) => (j === i ? { ...r, status: "success" } : r)));
       } catch (err: unknown) {
         const message = err instanceof Error ? err.message : "Failed";
         setResults((prev) =>
-          prev.map((r, j) => (j === i ? { ...r, status: "error", message } : r))
+          prev.map((r, j) => (j === i ? { ...r, status: "error", message } : r)),
         );
       }
       // Small delay to avoid rate limits
@@ -121,7 +156,9 @@ function SeedPage() {
                 {DEMO_USERS.map((u) => (
                   <div key={u.userId} className="flex items-center justify-between text-xs">
                     <span className="font-mono">{u.userId}</span>
-                    <span className="text-muted-foreground">{u.profile.name} ({u.profile.role})</span>
+                    <span className="text-muted-foreground">
+                      {u.profile.name} ({u.profile.role})
+                    </span>
                   </div>
                 ))}
               </div>
@@ -148,7 +185,9 @@ function SeedPage() {
                 <div key={r.userId} className="flex items-center justify-between">
                   <span className="text-sm font-mono">{r.userId}</span>
                   <div className="flex items-center gap-1.5">
-                    {r.status === "pending" && <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />}
+                    {r.status === "pending" && (
+                      <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+                    )}
                     {r.status === "success" && <CheckCircle2 className="h-4 w-4 text-green-600" />}
                     {r.status === "error" && (
                       <span className="flex items-center gap-1 text-xs text-destructive">
@@ -165,7 +204,8 @@ function SeedPage() {
               <div className="space-y-3">
                 <div className="rounded-xl border border-green-300 bg-green-50 p-3">
                   <p className="text-xs text-green-800">
-                    <strong>Done!</strong> You can now go to the login page and sign in with any demo account.
+                    <strong>Done!</strong> You can now go to the login page and sign in with any
+                    demo account.
                   </p>
                 </div>
                 <a

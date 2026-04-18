@@ -28,7 +28,8 @@ export function BottomNav({ role = "student" }: { role?: "student" | "admin" }) 
     <nav className="fixed bottom-0 left-0 right-0 z-50 border-t bg-card px-2 pb-[env(safe-area-inset-bottom)]">
       <div className="mx-auto flex max-w-lg items-center justify-around">
         {items.map((item) => {
-          const isActive = location.pathname === item.to || location.pathname.startsWith(item.to + "/");
+          const isActive =
+            location.pathname === item.to || location.pathname.startsWith(item.to + "/");
           return (
             <Link
               key={item.to}

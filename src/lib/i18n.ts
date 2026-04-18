@@ -119,7 +119,7 @@ export const translations = {
     monthlyAttendance: "মাসিক উপস্থিতি",
     tasksAwaitingSubmission: "টি কাজ জমা দিতে হবে",
     scheduledThisMonth: "টি এই মাসে নির্ধারিত",
-    nextSession: "পরবর্তী ক্লাস",
+    nextSession: "পরবর্তী সেশন",
     happeningSoon: "শীঘ্রই শুরু",
     checkInNow: "চেক ইন করুন",
     viewClassRoutine: "রুটিন দেখুন",

@@ -120,11 +120,7 @@ export async function createNotice(notice: {
   author: string;
   important: boolean;
 }) {
-  const { data, error } = await supabase
-    .from("notices")
-    .insert(notice)
-    .select()
-    .single();
+  const { data, error } = await supabase.from("notices").insert(notice).select().single();
 
   if (error) throw error;
   return data;
@@ -167,11 +163,7 @@ export async function createAssignment(assignment: {
   created_by: string;
   updated_by: string;
 }) {
-  const { data, error } = await supabase
-    .from("assignments")
-    .insert(assignment)
-    .select()
-    .single();
+  const { data, error } = await supabase.from("assignments").insert(assignment).select().single();
 
   if (error) throw error;
   return data;
@@ -215,11 +207,7 @@ export async function createExam(exam: {
   created_by: string;
   updated_by: string;
 }) {
-  const { data, error } = await supabase
-    .from("exams")
-    .insert(exam)
-    .select()
-    .single();
+  const { data, error } = await supabase.from("exams").insert(exam).select().single();
 
   if (error) throw error;
   return data;
@@ -244,14 +232,18 @@ export async function deleteExam(id: string) {
 
 // ── Attendance ───────────────────────────────────────────
 export async function fetchAttendanceRecordsForStudent(
-  studentId: string
-): Promise<(AttendanceRecord & { session: Pick<AttendanceSession, "date" | "time" | "subject"> })[]> {
+  studentId: string,
+): Promise<
+  (AttendanceRecord & { session: Pick<AttendanceSession, "date" | "time" | "subject"> })[]
+> {
   const { data, error } = await supabase
     .from("attendance_records")
-    .select(`
+    .select(
+      `
       *,
       session:attendance_sessions(date, time, subject)
-    `)
+    `,
+    )
     .eq("student_id", studentId)
     .order("created_at", { ascending: false });
 
@@ -262,10 +254,12 @@ export async function fetchAttendanceRecordsForStudent(
 export async function fetchAttendanceSessions(): Promise<AttendanceSession[]> {
   const { data, error } = await supabase
     .from("attendance_sessions")
-    .select(`
+    .select(
+      `
       *,
       records:attendance_records(*)
-    `)
+    `,
+    )
     .order("date", { ascending: false });
 
   if (error) throw error;
@@ -294,11 +288,9 @@ export async function createAttendanceRecords(
     student_name: string;
     status: "present" | "absent" | "late";
     remarks: string;
-  }[]
+  }[],
 ) {
-  const { error } = await supabase
-    .from("attendance_records")
-    .insert(records);
+  const { error } = await supabase.from("attendance_records").insert(records);
 
   if (error) throw error;
 }
@@ -335,11 +327,7 @@ export async function createResult(result: {
   date: string;
   uploaded_by: string;
 }) {
-  const { data, error } = await supabase
-    .from("results")
-    .insert(result)
-    .select()
-    .single();
+  const { data, error } = await supabase.from("results").insert(result).select().single();
 
   if (error) throw error;
   return data;
@@ -394,11 +382,7 @@ export async function fetchCurrentProfile(): Promise<Profile | null> {
   } = await supabase.auth.getUser();
   if (!user) return null;
 
-  const { data, error } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("id", user.id)
-    .single();
+  const { data, error } = await supabase.from("profiles").select("*").eq("id", user.id).single();
 
   if (error) throw error;
   return data;

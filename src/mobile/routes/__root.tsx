@@ -50,9 +50,9 @@ function RootComponent() {
       <AuthProvider>
         <LanguageProvider>
           <div className="pt-[env(safe-area-inset-top,2.5rem)] min-h-screen bg-background w-full">
-            <PullToRefresh 
+            <PullToRefresh
               onRefresh={handleRefresh}
-              pullingContent={''}
+              pullingContent={""}
               refreshingContent={<RefreshSpinner />}
             >
               <Outlet />
@@ -63,4 +63,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-

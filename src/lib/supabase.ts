@@ -4,9 +4,7 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error(
-    "Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY environment variables"
-  );
+  throw new Error("Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY environment variables");
 }
 
 // 15 days in milliseconds
@@ -20,10 +18,16 @@ const isBrowser = typeof window !== "undefined" && typeof localStorage !== "unde
  * On the server, there's no localStorage, so we use an in-memory no-op.
  */
 const noopStorage: Storage = {
-  get length() { return 0; },
+  get length() {
+    return 0;
+  },
   clear() {},
-  key() { return null; },
-  getItem() { return null; },
+  key() {
+    return null;
+  },
+  getItem() {
+    return null;
+  },
   setItem() {},
   removeItem() {},
 };

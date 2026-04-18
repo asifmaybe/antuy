@@ -139,7 +139,7 @@ export const mockResults = [
 
 export const mockStudent = {
   id: "STU001",
-  name: "Ananya Das",
+  name: "Asif Ahmed",
   attendancePercent: 89,
 };
 
@@ -151,34 +151,149 @@ export const mockNextSession = {
 };
 
 export const mockRoutine = [
-  { day: "Sunday", periods: [
-    { time: "8:00–8:45", subject: "Generation of Electrical Power (26751)", teacher: "Md. Mosharrof Hosen", hall: "COM 405" },
-    { time: "8:45–9:30", subject: "Principle of Marketing (25851)", teacher: "Emdadul Hoque", hall: "COM 405" },
-    { time: "9:30–10:15", subject: "Industrial Management (25852)", teacher: "Emdadul Hoque", hall: "COM 405" },
-    { time: "11:00–11:45", subject: "Elec. & Electronic Measurement-I (26752)", teacher: "Md. EmaratHossain", hall: "EMS" },
-    { time: "12:30–1:15", subject: "Testing & Maintenance of Elec. Equip. (26753)", teacher: "Razaul Karim", hall: "EMS" },
-  ]},
-  { day: "Monday", periods: [
-    { time: "8:45–10:15", subject: "Electrical Engineering Project-II (26754)", teacher: "Rakibul Islam", hall: "EMS" },
-    { time: "10:15–11:00", subject: "Generation of Electrical Power (26751)", teacher: "Md. Mosharrof Hosen", hall: "EMS" },
-    { time: "11:45–12:30", subject: "Generation of Electrical Power (26751)", teacher: "Md. Mosharrof Hosen", hall: "EPS" },
-  ]},
-  { day: "Tuesday", periods: [
-    { time: "8:00–8:45", subject: "Testing & Maintenance of Elec. Equip. (26753)", teacher: "Razaul Karim", hall: "EPS" },
-    { time: "9:30–10:15", subject: "Microprocessor & Microcontroller (26853)", teacher: "Razaul Karim", hall: "EPS" },
-    { time: "11:00–11:45", subject: "Principle of Marketing (25851)", teacher: "Emdadul Hoque", hall: "COM 405" },
-    { time: "11:45–12:30", subject: "Microprocessor & Microcontroller (26853)", teacher: "Razaul Karim", hall: "COM 405" },
-    { time: "12:30–1:15", subject: "Elec. & Electronic Measurement-I (26752)", teacher: "Md. EmaratHossain", hall: "COM 405" },
-  ]},
-  { day: "Wednesday", periods: [
-    { time: "8:45–9:30", subject: "Industrial Management (25852)", teacher: "Emdadul Hoque", hall: "COM 401" },
-    { time: "9:30–10:15", subject: "Generation of Electrical Power (26751)", teacher: "Md. Mosharrof Hosen", hall: "COM 401" },
-    { time: "11:00–11:45", subject: "Electrical Engineering Project-II (26754)", teacher: "Rakibul Islam", hall: "EMS" },
-    { time: "12:30–1:15", subject: "Microprocessor & Microcontroller (26853)", teacher: "Razaul Karim", hall: "EMS" },
-  ]},
-  { day: "Thursday", periods: [
-    { time: "9:30–10:15", subject: "Elec. & Electronic Measurement-I (26752)", teacher: "Md. EmaratHossain", hall: "EPS" },
-    { time: "11:00–11:45", subject: "Testing & Maintenance of Elec. Equip. (26753)", teacher: "Razaul Karim", hall: "EMS" },
-    { time: "12:30–1:15", subject: "Microprocessor & Microcontroller (26853)", teacher: "Razaul Karim", hall: "EMS" },
-  ]},
+  {
+    day: "Sunday",
+    periods: [
+      {
+        time: "8:00–8:45",
+        subject: "Generation of Electrical Power (26751)",
+        teacher: "Md. Mosharrof Hosen",
+        hall: "COM 405",
+      },
+      {
+        time: "8:45–9:30",
+        subject: "Principle of Marketing (25851)",
+        teacher: "Emdadul Hoque",
+        hall: "COM 405",
+      },
+      {
+        time: "9:30–10:15",
+        subject: "Industrial Management (25852)",
+        teacher: "Emdadul Hoque",
+        hall: "COM 405",
+      },
+      {
+        time: "11:00–11:45",
+        subject: "Elec. & Electronic Measurement-I (26752)",
+        teacher: "Md. EmaratHossain",
+        hall: "EMS",
+      },
+      {
+        time: "12:30–1:15",
+        subject: "Testing & Maintenance of Elec. Equip. (26753)",
+        teacher: "Razaul Karim",
+        hall: "EMS",
+      },
+    ],
+  },
+  {
+    day: "Monday",
+    periods: [
+      {
+        time: "8:45–10:15",
+        subject: "Electrical Engineering Project-II (26754)",
+        teacher: "Rakibul Islam",
+        hall: "EMS",
+      },
+      {
+        time: "10:15–11:00",
+        subject: "Generation of Electrical Power (26751)",
+        teacher: "Md. Mosharrof Hosen",
+        hall: "EMS",
+      },
+      {
+        time: "11:45–12:30",
+        subject: "Generation of Electrical Power (26751)",
+        teacher: "Md. Mosharrof Hosen",
+        hall: "EPS",
+      },
+    ],
+  },
+  {
+    day: "Tuesday",
+    periods: [
+      {
+        time: "8:00–8:45",
+        subject: "Testing & Maintenance of Elec. Equip. (26753)",
+        teacher: "Razaul Karim",
+        hall: "EPS",
+      },
+      {
+        time: "9:30–10:15",
+        subject: "Microprocessor & Microcontroller (26853)",
+        teacher: "Razaul Karim",
+        hall: "EPS",
+      },
+      {
+        time: "11:00–11:45",
+        subject: "Principle of Marketing (25851)",
+        teacher: "Emdadul Hoque",
+        hall: "COM 405",
+      },
+      {
+        time: "11:45–12:30",
+        subject: "Microprocessor & Microcontroller (26853)",
+        teacher: "Razaul Karim",
+        hall: "COM 405",
+      },
+      {
+        time: "12:30–1:15",
+        subject: "Elec. & Electronic Measurement-I (26752)",
+        teacher: "Md. EmaratHossain",
+        hall: "COM 405",
+      },
+    ],
+  },
+  {
+    day: "Wednesday",
+    periods: [
+      {
+        time: "8:45–9:30",
+        subject: "Industrial Management (25852)",
+        teacher: "Emdadul Hoque",
+        hall: "COM 401",
+      },
+      {
+        time: "9:30–10:15",
+        subject: "Generation of Electrical Power (26751)",
+        teacher: "Md. Mosharrof Hosen",
+        hall: "COM 401",
+      },
+      {
+        time: "11:00–11:45",
+        subject: "Electrical Engineering Project-II (26754)",
+        teacher: "Rakibul Islam",
+        hall: "EMS",
+      },
+      {
+        time: "12:30–1:15",
+        subject: "Microprocessor & Microcontroller (26853)",
+        teacher: "Razaul Karim",
+        hall: "EMS",
+      },
+    ],
+  },
+  {
+    day: "Thursday",
+    periods: [
+      {
+        time: "9:30–10:15",
+        subject: "Elec. & Electronic Measurement-I (26752)",
+        teacher: "Md. EmaratHossain",
+        hall: "EPS",
+      },
+      {
+        time: "11:00–11:45",
+        subject: "Testing & Maintenance of Elec. Equip. (26753)",
+        teacher: "Razaul Karim",
+        hall: "EMS",
+      },
+      {
+        time: "12:30–1:15",
+        subject: "Microprocessor & Microcontroller (26853)",
+        teacher: "Razaul Karim",
+        hall: "EMS",
+      },
+    ],
+  },
 ];

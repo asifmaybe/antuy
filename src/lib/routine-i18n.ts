@@ -27,7 +27,8 @@ const subjectTranslations: Record<string, string> = {
   "Principle of Marketing": "প্রিন্সিপাল অফ মার্কেটিং",
   "Industrial Management": "ইন্ডাস্ট্রিয়াল ম্যানেজমেন্ট",
   "Elec. & Electronic Measurement-I": "ইলেকট্রিক্যাল অ্যান্ড ইলেকট্রনিক মেজারমেন্ট-১",
-  "Testing & Maintenance of Elec. Equip.": "টেস্টিং অ্যান্ড মেইনটেন্যান্স অফ ইলেকট্রিক্যাল ইকুইপমেন্ট",
+  "Testing & Maintenance of Elec. Equip.":
+    "টেস্টিং অ্যান্ড মেইনটেন্যান্স অফ ইলেকট্রিক্যাল ইকুইপমেন্ট",
   "Electrical Engineering Project-II": "ইলেকট্রিক্যাল ইঞ্জিনিয়ারিং প্রজেক্ট-২",
   "Microprocessor & Microcontroller": "মাইক্রোপ্রসেসর ও মাইক্রোকন্ট্রোলার",
 };

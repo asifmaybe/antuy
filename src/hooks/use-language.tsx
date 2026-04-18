@@ -27,15 +27,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
-  const t = useCallback(
-    (key: TranslationKey) => translations[lang][key] ?? key,
-    [lang]
-  );
+  const t = useCallback((key: TranslationKey) => translations[lang][key] ?? key, [lang]);
 
   return (
-    <LanguageContext.Provider value={{ lang, toggleLang, t }}>
-      {children}
-    </LanguageContext.Provider>
+    <LanguageContext.Provider value={{ lang, toggleLang, t }}>{children}</LanguageContext.Provider>
   );
 }
 

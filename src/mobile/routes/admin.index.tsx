@@ -1,11 +1,28 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { LogOut, ClipboardList, GraduationCap, Users, Bell, BarChart3, Clock, Activity, Loader2, LayoutDashboard } from "lucide-react";
+import {
+  LogOut,
+  ClipboardList,
+  GraduationCap,
+  Users,
+  Bell,
+  BarChart3,
+  Clock,
+  Activity,
+  Loader2,
+  LayoutDashboard,
+} from "lucide-react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { NoticesBanner } from "@/components/NoticesBanner";
 import { useLanguage } from "@/hooks/use-language";
 import { useAuth } from "@/hooks/use-auth";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchAssignments, fetchExams, fetchAllResults, fetchAuditLog, fetchNotices } from "@/lib/api";
+import {
+  fetchAssignments,
+  fetchExams,
+  fetchAllResults,
+  fetchAuditLog,
+  fetchNotices,
+} from "@/lib/api";
 import { formatDateTime } from "@/lib/date";
 
 export const Route = createFileRoute("/admin/")({
@@ -48,9 +65,9 @@ function AdminDashboard() {
     queryFn: fetchAuditLog,
   });
 
-  const activeAssignments = assignments.filter(a => a.status === "active").length;
-  const overdueAssignments = assignments.filter(a => a.status === "overdue").length;
-  const upcomingExams = exams.filter(e => e.upcoming).length;
+  const activeAssignments = assignments.filter((a) => a.status === "active").length;
+  const overdueAssignments = assignments.filter((a) => a.status === "overdue").length;
+  const upcomingExams = exams.filter((e) => e.upcoming).length;
   const totalResults = results.length;
 
   const stats = [
@@ -103,7 +120,11 @@ function AdminDashboard() {
             </p>
             <h1 className="text-xl font-bold">{user?.name || "Admin"}</h1>
             <p className="text-xs text-muted-foreground capitalize">
-              {user?.role === "cr" ? (lang === "bn" ? "ক্লাস রিপ্রেজেন্টেটিভ" : "Class Representative") : user?.subject || (lang === "bn" ? "শিক্ষক" : "Teacher")}
+              {user?.role === "cr"
+                ? lang === "bn"
+                  ? "ক্লাস রিপ্রেজেন্টেটিভ"
+                  : "Class Representative"
+                : user?.subject || (lang === "bn" ? "শিক্ষক" : "Teacher")}
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -129,9 +150,7 @@ function AdminDashboard() {
 
       <main className="px-4 space-y-6">
         {/* Notices Banner (For Admin/Teacher only) */}
-        {user?.role !== "cr" && (
-          <NoticesBanner notices={notices} isLoading={isNoticesLoading} />
-        )}
+        {user?.role !== "cr" && <NoticesBanner notices={notices} isLoading={isNoticesLoading} />}
 
         {/* Quick Actions */}
         <section>
@@ -146,7 +165,9 @@ function AdminDashboard() {
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent">
                 <ClipboardList className="h-5 w-5 text-primary" />
               </div>
-              <span className="text-sm font-medium">{lang === "bn" ? "অ্যাসাইনমেন্ট" : "Assignments"}</span>
+              <span className="text-sm font-medium">
+                {lang === "bn" ? "অ্যাসাইনমেন্ট" : "Assignments"}
+              </span>
             </Link>
             <Link
               to="/admin/exams"
@@ -164,7 +185,9 @@ function AdminDashboard() {
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent">
                 <Users className="h-5 w-5 text-primary" />
               </div>
-              <span className="text-sm font-medium">{lang === "bn" ? "উপস্থিতি" : "Attendance"}</span>
+              <span className="text-sm font-medium">
+                {lang === "bn" ? "উপস্থিতি" : "Attendance"}
+              </span>
             </Link>
             <Link
               to="/admin/notices"
@@ -190,7 +213,9 @@ function AdminDashboard() {
                 className="flex items-center gap-4 rounded-xl border bg-card p-4 cursor-pointer transition-shadow hover:shadow-md active:scale-[0.98]"
                 onClick={() => navigate({ to: stat.to })}
               >
-                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${stat.bg}`}>
+                <div
+                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${stat.bg}`}
+                >
                   <stat.icon className={`h-5 w-5 ${stat.color}`} />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -224,7 +249,10 @@ function AdminDashboard() {
           ) : (
             <div className="space-y-2">
               {auditLog.slice(0, 5).map((log) => (
-                <div key={log.id} className="flex items-start gap-3 rounded-xl border bg-card p-3.5">
+                <div
+                  key={log.id}
+                  className="flex items-start gap-3 rounded-xl border bg-card p-3.5"
+                >
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted">
                     <Clock className="h-3.5 w-3.5 text-muted-foreground" />
                   </div>

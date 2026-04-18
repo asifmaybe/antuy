@@ -172,7 +172,12 @@ function formatDisplayTime(d: Date): string {
 }
 
 // ── Status badge config ────────────────────────────────
-function getStatusConfig(status: SessionStatus, day: string, t: (key: TranslationKey) => string, lang: Language) {
+function getStatusConfig(
+  status: SessionStatus,
+  day: string,
+  t: (key: TranslationKey) => string,
+  lang: Language,
+) {
   switch (status) {
     case "happening_now":
       return {
@@ -254,10 +259,13 @@ export function NextSessionCard() {
   const statusConfig = getStatusConfig(status, day, t, lang as Language);
   const { name: subjectName, code: subjectCode } = extractSubjectInfo(period.subject);
 
-  const isToday = status === "happening_now" || status === "happening_soon" || status === "next_class";
+  const isToday =
+    status === "happening_now" || status === "happening_soon" || status === "next_class";
 
   return (
-    <div className={`rounded-2xl ${statusConfig.bgColor} p-5 text-white relative overflow-hidden transition-all duration-300`}>
+    <div
+      className={`rounded-2xl ${statusConfig.bgColor} p-5 text-white relative overflow-hidden transition-all duration-300`}
+    >
       {/* Pulsing indicator for "happening now" */}
       {statusConfig.pulse && (
         <div className="absolute top-4 right-4 flex items-center gap-1.5">
@@ -275,7 +283,9 @@ export function NextSessionCard() {
       </p>
 
       {/* Subject name */}
-      <h3 className="mt-2 text-xl font-bold leading-tight">{translateSubject(subjectName, lang as Language)}</h3>
+      <h3 className="mt-2 text-xl font-bold leading-tight">
+        {translateSubject(subjectName, lang as Language)}
+      </h3>
 
       {/* Subject code + teacher */}
       {subjectCode && (

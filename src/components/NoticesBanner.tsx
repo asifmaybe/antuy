@@ -14,12 +14,12 @@ interface Notice {
   important: boolean;
 }
 
-export function NoticesBanner({ 
-  notices, 
-  isLoading = false 
-}: { 
-  notices: Notice[]; 
-  isLoading?: boolean 
+export function NoticesBanner({
+  notices,
+  isLoading = false,
+}: {
+  notices: Notice[];
+  isLoading?: boolean;
 }) {
   const [current, setCurrent] = useState(0);
   const { t } = useLanguage();
@@ -60,10 +60,7 @@ export function NoticesBanner({
             {t("notices")}
           </span>
         </div>
-        <Link
-          to="/notices"
-          className="text-xs font-medium text-primary hover:underline"
-        >
+        <Link to="/notices" className="text-xs font-medium text-primary hover:underline">
           {t("viewAll")}
         </Link>
       </div>

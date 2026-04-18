@@ -41,7 +41,10 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { title: "EduPortal — College Academic Management" },
-      { name: "description", content: "Mobile-first college academic management system for students and teachers" },
+      {
+        name: "description",
+        content: "Mobile-first college academic management system for students and teachers",
+      },
       { property: "og:title", content: "EduPortal — College Academic Management" },
       { property: "og:description", content: "Mobile-first college academic management system" },
       { property: "og:type", content: "website" },
@@ -50,7 +53,10 @@ export const Route = createRootRoute({
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap",
+      },
       { rel: "stylesheet", href: appCss },
     ],
   }),
@@ -84,4 +90,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-

@@ -1,4 +1,12 @@
-import { createContext, useContext, useEffect, useState, useRef, useCallback, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+  type ReactNode,
+} from "react";
 import { type UserProfile, getCurrentUser, onAuthStateChange, signIn, signOut } from "@/lib/auth";
 
 interface AuthContextType {
@@ -32,7 +40,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       });
 
     // Listen for auth changes (other tabs, token refresh, etc.)
-    const { data: { subscription } } = onAuthStateChange((profile) => {
+    const {
+      data: { subscription },
+    } = onAuthStateChange((profile) => {
       // Skip if a manual login/logout is in progress — it will set state itself
       if (manualActionRef.current) return;
       if (mounted) setUser(profile);
@@ -52,7 +62,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return profile;
     } finally {
       // Small delay to let onAuthStateChange fire and be ignored
-      setTimeout(() => { manualActionRef.current = false; }, 500);
+      setTimeout(() => {
+        manualActionRef.current = false;
+      }, 500);
     }
   }, []);
 
@@ -65,15 +77,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       // signOut should never throw now, but just in case
       setUser(null);
     } finally {
-      setTimeout(() => { manualActionRef.current = false; }, 500);
+      setTimeout(() => {
+        manualActionRef.current = false;
+      }, 500);
     }
   }, []);
 
-  return (
-    <AuthContext value={{ user, loading, login, logout }}>
-      {children}
-    </AuthContext>
-  );
+  return <AuthContext value={{ user, loading, login, logout }}>{children}</AuthContext>;
 }
 
 export function useAuth() {

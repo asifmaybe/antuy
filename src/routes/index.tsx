@@ -3,8 +3,9 @@ import { useState, useEffect, useRef } from "react";
 import { Eye, EyeOff, Info, Loader2 } from "lucide-react";
 import { demoUsers } from "@/lib/auth";
 import { useAuth } from "@/hooks/use-auth";
+import { useQueryClient } from "@tanstack/react-query";
 
-export const Route = createFileRoute("/")(  {
+export const Route = createFileRoute("/")({
   component: LoginPage,
   head: () => ({
     meta: [
@@ -23,6 +24,7 @@ function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [showDemo, setShowDemo] = useState(false);
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { user, loading: authLoading, login } = useAuth();
   const loginAbortRef = useRef(false);
 
@@ -54,6 +56,7 @@ function LoginPage() {
 
     try {
       const profile = await login(id, password);
+      queryClient.clear(); // Clear cached [] arrays from auth transition states
       clearTimeout(safetyTimer);
       if (loginAbortRef.current) return; // Already timed out
 
@@ -105,11 +108,7 @@ function LoginPage() {
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
           <div className="flex h-20 w-20 items-center justify-center rounded-4xl bg-primary mb-4 overflow-hidden">
-            <img 
-              src="/fpi-logo.png" 
-              alt="Logo" 
-              className="h-20 w-20 object-contain"
-            />
+            <img src="/fpi-logo.png" alt="Logo" className="h-20 w-20 object-contain" />
           </div>
           <h1 className="text-2xl font-bold">Electrial 23-24</h1>
           <p className="text-sm text-muted-foreground">College Academic Management</p>
@@ -141,7 +140,10 @@ function LoginPage() {
             type="text"
             placeholder={tab === "student" ? "Student ID (e.g. STU001)" : "Teacher / CR ID"}
             value={id}
-            onChange={(e) => { setId(e.target.value); setError(""); }}
+            onChange={(e) => {
+              setId(e.target.value);
+              setError("");
+            }}
             className="w-full rounded-xl border bg-card px-4 py-3.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
           />
           <div className="relative">
@@ -149,7 +151,10 @@ function LoginPage() {
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               value={password}
-              onChange={(e) => { setPassword(e.target.value); setError(""); }}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setError("");
+              }}
               className="w-full rounded-xl border bg-card px-4 py-3.5 pr-12 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
             />
             <button
@@ -195,7 +200,9 @@ function LoginPage() {
               >
                 <div>
                   <p className="text-xs font-semibold">{user.name}</p>
-                  <p className="text-[10px] text-muted-foreground capitalize">{user.role === "cr" ? "Class Representative" : user.role}</p>
+                  <p className="text-[10px] text-muted-foreground capitalize">
+                    {user.role === "cr" ? "Class Representative" : user.role}
+                  </p>
                 </div>
                 <div className="text-right">
                   <p className="text-[10px] font-mono text-foreground">{user.id}</p>
