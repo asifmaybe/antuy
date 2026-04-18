@@ -5,7 +5,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { useAuth } from "@/hooks/use-auth";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchNotices, createNotice, updateNotice, deleteNotice, logAuditEntry } from "@/lib/api";
-import { formatFullDate } from "@/lib/date";
+import { formatFullDate, formatTime12Hour } from "@/lib/date";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -139,7 +139,7 @@ function AdminNoticesPage() {
                     </div>
                     <p className="text-xs text-muted-foreground">{n.description}</p>
                     <p className="text-[10px] text-muted-foreground mt-2">
-                      {n.author} · {formatDate(n.date)} · {n.time}
+                      {n.author} · {formatDate(n.date)} · {formatTime12Hour(n.time)}
                     </p>
                   </div>
                   <div className="flex items-center gap-1 shrink-0">

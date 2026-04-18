@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Bell } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useLanguage } from "@/hooks/use-language";
+import { formatTime12Hour } from "@/lib/date";
 
 interface Notice {
   id: string;
@@ -46,12 +47,11 @@ export function NoticesBanner({ notices }: { notices: Notice[] }) {
             <p className="text-xs text-muted-foreground mt-0.5">{notice.description}</p>
           </div>
         </div>
-        <div className="flex flex-col gap-1.5 mt-3">
-          <p className="text-[11px] text-muted-foreground">
-            {notice.date} · {notice.time} · {notice.author}
+        <div className="flex items-center justify-between mt-3">
+          <p className="text-[11px] text-muted-foreground truncate mr-2">
+            {notice.date} · {formatTime12Hour(notice.time)} · {notice.author}
           </p>
-          <div className="flex items-center justify-between">
-          <div className="flex gap-1.5">
+          <div className="flex gap-1.5 shrink-0">
             {notices.map((_, i) => (
               <button
                 key={i}
@@ -61,7 +61,6 @@ export function NoticesBanner({ notices }: { notices: Notice[] }) {
                 }`}
               />
             ))}
-            </div>
           </div>
         </div>
       </div>

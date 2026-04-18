@@ -3,15 +3,11 @@
   "buildCommand": "npm run build",
   "installCommand": "npm install",
   "framework": null,
-  "outputDirectory": "dist",
-  "routes": [
+  "outputDirectory": "dist/client",
+  "rewrites": [
     {
-      "src": "^/assets/(.*)",
-      "dest": "/client/assets/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/api/index.js"
+      "source": "/(.*)",
+      "destination": "/api/index.js"
     }
   ]
 }

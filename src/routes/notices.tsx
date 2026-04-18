@@ -5,7 +5,7 @@ import { RouteGuard } from "@/components/RouteGuard";
 import { useLanguage } from "@/hooks/use-language";
 import { useQuery } from "@tanstack/react-query";
 import { fetchNotices } from "@/lib/api";
-import { formatFullDate } from "@/lib/date";
+import { formatFullDate, formatTime12Hour } from "@/lib/date";
 
 export const Route = createFileRoute("/notices")({
   component: NoticesPage,
@@ -66,7 +66,7 @@ function NoticesPage() {
                   <div className="flex flex-wrap items-center gap-3 mt-2.5">
                     <span className="flex items-center gap-1 text-[11px] text-muted-foreground">
                       <Clock className="h-3 w-3" />
-                      {formatDate(notice.date)} · {notice.time}
+                      {formatDate(notice.date)} · {formatTime12Hour(notice.time)}
                     </span>
                     <span className="flex items-center gap-1 text-[11px] text-muted-foreground">
                       <User className="h-3 w-3" />

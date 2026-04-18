@@ -44,3 +44,16 @@ export function nowBST(): Date {
     new Date().toLocaleString("en-US", { timeZone: BST_TIMEZONE })
   );
 }
+
+/** Formats a raw time string (e.g. 19:57:48.910923) into 12-hour "7:57 PM" format */
+export function formatTime12Hour(timeString: string | null | undefined): string {
+  if (!timeString) return "";
+  const parts = timeString.split(":");
+  if (parts.length < 2) return timeString;
+  let hours = parseInt(parts[0], 10);
+  const minutes = parts[1];
+  const ampm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  return `${hours}:${minutes} ${ampm}`;
+}

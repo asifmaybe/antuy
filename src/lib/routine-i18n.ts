@@ -23,12 +23,12 @@ export function translateDay(day: string, lang: Language): string {
 // ── Subject translations ──────────────────────────────
 // Maps English subject names (without code) to Bengali
 const subjectTranslations: Record<string, string> = {
-  "Generation of Electrical Power": "তড়িৎ শক্তি উৎপাদন",
-  "Principle of Marketing": "বিপণন নীতিমালা",
-  "Industrial Management": "শিল্প ব্যবস্থাপনা",
-  "Elec. & Electronic Measurement-I": "তড়িৎ ও ইলেকট্রনিক পরিমাপ-১",
-  "Testing & Maintenance of Elec. Equip.": "তড়িৎ যন্ত্রপাতি পরীক্ষণ ও রক্ষণাবেক্ষণ",
-  "Electrical Engineering Project-II": "তড়িৎ প্রকৌশল প্রকল্প-২",
+  "Generation of Electrical Power": "জেনারেশন অফ ইলেকট্রিক্যাল পাওয়ার",
+  "Principle of Marketing": "প্রিন্সিপাল অফ মার্কেটিং",
+  "Industrial Management": "ইন্ডাস্ট্রিয়াল ম্যানেজমেন্ট",
+  "Elec. & Electronic Measurement-I": "ইলেকট্রিক্যাল অ্যান্ড ইলেকট্রনিক মেজারমেন্ট-১",
+  "Testing & Maintenance of Elec. Equip.": "টেস্টিং অ্যান্ড মেইনটেন্যান্স অফ ইলেকট্রিক্যাল ইকুইপমেন্ট",
+  "Electrical Engineering Project-II": "ইলেকট্রিক্যাল ইঞ্জিনিয়ারিং প্রজেক্ট-২",
   "Microprocessor & Microcontroller": "মাইক্রোপ্রসেসর ও মাইক্রোকন্ট্রোলার",
 };
 
