@@ -18,7 +18,7 @@ function idToEmail(userId: string): string {
 }
 
 // ── Helper: wrap a promise with a timeout ──
-function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
+function withTimeout<T>(promise: PromiseLike<T>, ms: number, label: string): Promise<T> {
   return Promise.race([
     promise,
     new Promise<never>((_, reject) =>
