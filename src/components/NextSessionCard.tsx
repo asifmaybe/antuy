@@ -195,19 +195,19 @@ function getStatusConfig(status: SessionStatus, day: string, t: (key: Translatio
     case "tomorrow":
       return {
         label: `${t("resumesTomorrow")} · ${translateDay(day, lang)}`,
-        bgColor: "bg-slate-700 dark:bg-slate-600",
+        bgColor: "bg-primary",
         pulse: false,
       };
     case "next_sunday":
       return {
         label: `${t("resumesSunday")}`,
-        bgColor: "bg-slate-700 dark:bg-slate-600",
+        bgColor: "bg-primary",
         pulse: false,
       };
     default:
       return {
         label: t("noClasses"),
-        bgColor: "bg-slate-700 dark:bg-slate-600",
+        bgColor: "bg-primary",
         pulse: false,
       };
   }
@@ -240,7 +240,7 @@ export function NextSessionCard() {
 
   if (!session || !session.period) {
     return (
-      <div className="rounded-2xl bg-slate-700 p-5 text-white">
+      <div className="rounded-2xl bg-primary p-5 text-white">
         <p className="text-[10px] font-semibold tracking-widest uppercase opacity-70">
           {t("noClasses")}
         </p>
