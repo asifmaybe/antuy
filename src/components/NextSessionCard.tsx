@@ -280,7 +280,7 @@ export function NextSessionCard() {
       {/* Subject code + teacher */}
       {subjectCode && (
         <p className="text-base font-medium opacity-80">
-          {subjectCode} — {translateTeacher(period.teacher, lang as Language).split(" ").pop()}
+          {subjectCode} — {translateTeacher(period.teacher, lang as Language)}
         </p>
       )}
 

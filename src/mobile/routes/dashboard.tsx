@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { LogOut, ClipboardList, CalendarClock, UserCheck, CalendarDays } from "lucide-react";
+import { LogOut, ClipboardList, CalendarClock, UserCheck, CalendarDays, ShieldAlert } from "lucide-react";
 import { BottomNav } from "@/components/BottomNav";
 import { NoticesBanner } from "@/components/NoticesBanner";
 import { NextSessionCard } from "@/components/NextSessionCard";
@@ -26,7 +26,7 @@ function DashboardPage() {
   const { t, lang } = useLanguage();
   const { user, logout } = useAuth();
 
-  const { data: notices = [] } = useQuery({
+  const { data: notices = [], isLoading: isNoticesLoading } = useQuery({
     queryKey: ["notices"],
     queryFn: fetchNotices,
   });
@@ -67,7 +67,7 @@ function DashboardPage() {
   };
 
   return (
-    <RouteGuard allowedRoles={["student"]}>
+    <RouteGuard allowedRoles={["student", "cr"]}>
     <div className={`min-h-screen pb-20 ${lang === "bn" ? "font-bengali" : ""}`}>
       <header className="px-4 pt-6 pb-4">
         <div className="flex items-center justify-between">
@@ -76,6 +76,15 @@ function DashboardPage() {
             <h1 className="text-xl font-bold">{user?.name ?? "Student"}</h1>
           </div>
           <div className="flex items-center gap-2">
+            {user?.role === "cr" && (
+              <button
+                onClick={() => navigate({ to: "/admin/" })}
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors hover:bg-primary/20"
+                title={lang === "bn" ? "অ্যাডমিন প্যানেল" : "Admin Panel"}
+              >
+                <ShieldAlert className="h-4.5 w-4.5" />
+              </button>
+            )}
             <LanguageSwitcher />
             <button
               onClick={handleLogout}
@@ -88,7 +97,7 @@ function DashboardPage() {
       </header>
 
       <main className="px-4 space-y-6">
-        <NoticesBanner notices={notices} />
+        <NoticesBanner notices={notices} isLoading={isNoticesLoading} />
 
         {/* Overview Section */}
         <section>

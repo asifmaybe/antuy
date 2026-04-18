@@ -1,10 +1,11 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { LogOut, ClipboardList, GraduationCap, Users, Bell, BarChart3, Clock, Activity, Loader2 } from "lucide-react";
+import { LogOut, ClipboardList, GraduationCap, Users, Bell, BarChart3, Clock, Activity, Loader2, LayoutDashboard } from "lucide-react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { NoticesBanner } from "@/components/NoticesBanner";
 import { useLanguage } from "@/hooks/use-language";
 import { useAuth } from "@/hooks/use-auth";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchAssignments, fetchExams, fetchAllResults, fetchAuditLog } from "@/lib/api";
+import { fetchAssignments, fetchExams, fetchAllResults, fetchAuditLog, fetchNotices } from "@/lib/api";
 import { formatDateTime } from "@/lib/date";
 
 export const Route = createFileRoute("/admin/")({
@@ -21,6 +22,11 @@ function AdminDashboard() {
   const navigate = useNavigate();
   const { lang } = useLanguage();
   const { user, logout } = useAuth();
+
+  const { data: notices = [], isLoading: isNoticesLoading } = useQuery({
+    queryKey: ["notices"],
+    queryFn: fetchNotices,
+  });
 
   const { data: assignments = [] } = useQuery({
     queryKey: ["assignments"],
@@ -101,6 +107,15 @@ function AdminDashboard() {
             </p>
           </div>
           <div className="flex items-center gap-2">
+            {user?.role === "cr" && (
+              <button
+                onClick={() => navigate({ to: "/dashboard" })}
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors hover:bg-primary/20"
+                title={lang === "bn" ? "স্টুডেন্ট ড্যাশবোর্ড" : "Student Dashboard"}
+              >
+                <LayoutDashboard className="h-4.5 w-4.5" />
+              </button>
+            )}
             <LanguageSwitcher />
             <button
               onClick={handleLogout}
@@ -113,6 +128,11 @@ function AdminDashboard() {
       </header>
 
       <main className="px-4 space-y-6">
+        {/* Notices Banner (For Admin/Teacher only) */}
+        {user?.role !== "cr" && (
+          <NoticesBanner notices={notices} isLoading={isNoticesLoading} />
+        )}
+
         {/* Quick Actions */}
         <section>
           <h2 className="font-semibold text-base mb-3">

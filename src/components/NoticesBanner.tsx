@@ -14,12 +14,42 @@ interface Notice {
   important: boolean;
 }
 
-export function NoticesBanner({ notices }: { notices: Notice[] }) {
+export function NoticesBanner({ 
+  notices, 
+  isLoading = false 
+}: { 
+  notices: Notice[]; 
+  isLoading?: boolean 
+}) {
   const [current, setCurrent] = useState(0);
   const { t } = useLanguage();
 
-  if (notices.length === 0) return null;
-  const notice = notices[current];
+  if (isLoading) {
+    return (
+      <div className="rounded-xl border bg-card p-4">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <Bell className="h-4 w-4 text-muted-foreground" />
+            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              {t("notices")}
+            </span>
+          </div>
+        </div>
+        <div className="space-y-2">
+          <div className="h-4 w-3/4 rounded bg-muted animate-pulse" />
+          <div className="h-3 w-1/2 rounded bg-muted animate-pulse" />
+        </div>
+      </div>
+    );
+  }
+
+  if (!notices || notices.length === 0) return null;
+
+  // Safe guard: if current is somehow out of bounds (e.g. data shrank), reset safely
+  const activeIndex = current >= notices.length ? 0 : current;
+  const notice = notices[activeIndex];
+
+  if (!notice) return null;
 
   return (
     <div className="rounded-xl border bg-card p-4">
@@ -57,7 +87,7 @@ export function NoticesBanner({ notices }: { notices: Notice[] }) {
                 key={i}
                 onClick={() => setCurrent(i)}
                 className={`h-2 w-2 rounded-full transition-colors ${
-                  i === current ? "bg-primary" : "bg-muted-foreground/30"
+                  i === activeIndex ? "bg-primary" : "bg-muted-foreground/30"
                 }`}
               />
             ))}

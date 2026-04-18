@@ -2,6 +2,8 @@ import { Outlet, createRootRoute } from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LanguageProvider } from "@/hooks/use-language";
 import { AuthProvider } from "@/hooks/use-auth";
+import PullToRefresh from "react-simple-pull-to-refresh";
+import { Loader2 } from "lucide-react";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,13 +33,34 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
+  const handleRefresh = async () => {
+    await queryClient.invalidateQueries();
+    // A tiny delay makes the animation feel more natural
+    await new Promise((resolve) => setTimeout(resolve, 600));
+  };
+
+  const RefreshSpinner = () => (
+    <div className="flex justify-center p-4">
+      <Loader2 className="h-6 w-6 animate-spin text-primary" />
+    </div>
+  );
+
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <LanguageProvider>
-          <Outlet />
+          <div className="pt-[env(safe-area-inset-top,2.5rem)] min-h-screen bg-background w-full">
+            <PullToRefresh 
+              onRefresh={handleRefresh}
+              pullingContent={''}
+              refreshingContent={<RefreshSpinner />}
+            >
+              <Outlet />
+            </PullToRefresh>
+          </div>
         </LanguageProvider>
       </AuthProvider>
     </QueryClientProvider>
   );
 }
+

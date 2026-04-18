@@ -31,7 +31,7 @@ function ExamsPage() {
   const formatDate = formatShortDate;
 
   return (
-    <RouteGuard allowedRoles={["student"]}>
+    <RouteGuard allowedRoles={["student", "cr"]}>
     <div className={`min-h-screen pb-20 ${lang === "bn" ? "font-bengali" : ""}`}>
       <header className="px-4 pt-6 pb-2">
         <h1 className="text-xl font-bold">{t("examsAndQuizzes")}</h1>

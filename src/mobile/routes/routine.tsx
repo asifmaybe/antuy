@@ -22,7 +22,7 @@ function RoutinePage() {
   const { t, lang } = useLanguage();
 
   return (
-    <RouteGuard allowedRoles={["student"]}>
+    <RouteGuard allowedRoles={["student", "cr"]}>
     <div className={`min-h-screen pb-20 ${lang === "bn" ? "font-bengali" : ""}`}>
       <header className="px-4 pt-6 pb-4">
         <div className="flex items-center justify-between">

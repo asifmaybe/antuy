@@ -30,7 +30,7 @@ function LoginPage() {
   useEffect(() => {
     if (authLoading) return;
     if (user) {
-      if (user.role === "teacher" || user.role === "cr") {
+      if (user.role === "teacher" || user.role === "admin") {
         navigate({ to: "/admin" });
       } else {
         navigate({ to: "/dashboard" });
@@ -57,7 +57,7 @@ function LoginPage() {
       clearTimeout(safetyTimer);
       if (loginAbortRef.current) return;
 
-      if (profile.role === "teacher" || profile.role === "cr") {
+      if (profile.role === "teacher" || profile.role === "admin") {
         navigate({ to: "/admin" });
       } else {
         navigate({ to: "/dashboard" });
