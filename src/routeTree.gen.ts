@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SeedRouteImport } from './routes/seed'
 import { Route as RoutineRouteImport } from './routes/routine'
 import { Route as ResultsRouteImport } from './routes/results'
 import { Route as NoticesRouteImport } from './routes/notices'
@@ -25,6 +26,11 @@ import { Route as AdminExamsRouteImport } from './routes/admin.exams'
 import { Route as AdminAttendanceRouteImport } from './routes/admin.attendance'
 import { Route as AdminAssignmentsRouteImport } from './routes/admin.assignments'
 
+const SeedRoute = SeedRouteImport.update({
+  id: '/seed',
+  path: '/seed',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RoutineRoute = RoutineRouteImport.update({
   id: '/routine',
   path: '/routine',
@@ -111,6 +117,7 @@ export interface FileRoutesByFullPath {
   '/notices': typeof NoticesRoute
   '/results': typeof ResultsRoute
   '/routine': typeof RoutineRoute
+  '/seed': typeof SeedRoute
   '/admin/assignments': typeof AdminAssignmentsRoute
   '/admin/attendance': typeof AdminAttendanceRoute
   '/admin/exams': typeof AdminExamsRoute
@@ -127,6 +134,7 @@ export interface FileRoutesByTo {
   '/notices': typeof NoticesRoute
   '/results': typeof ResultsRoute
   '/routine': typeof RoutineRoute
+  '/seed': typeof SeedRoute
   '/admin/assignments': typeof AdminAssignmentsRoute
   '/admin/attendance': typeof AdminAttendanceRoute
   '/admin/exams': typeof AdminExamsRoute
@@ -145,6 +153,7 @@ export interface FileRoutesById {
   '/notices': typeof NoticesRoute
   '/results': typeof ResultsRoute
   '/routine': typeof RoutineRoute
+  '/seed': typeof SeedRoute
   '/admin/assignments': typeof AdminAssignmentsRoute
   '/admin/attendance': typeof AdminAttendanceRoute
   '/admin/exams': typeof AdminExamsRoute
@@ -164,6 +173,7 @@ export interface FileRouteTypes {
     | '/notices'
     | '/results'
     | '/routine'
+    | '/seed'
     | '/admin/assignments'
     | '/admin/attendance'
     | '/admin/exams'
@@ -180,6 +190,7 @@ export interface FileRouteTypes {
     | '/notices'
     | '/results'
     | '/routine'
+    | '/seed'
     | '/admin/assignments'
     | '/admin/attendance'
     | '/admin/exams'
@@ -197,6 +208,7 @@ export interface FileRouteTypes {
     | '/notices'
     | '/results'
     | '/routine'
+    | '/seed'
     | '/admin/assignments'
     | '/admin/attendance'
     | '/admin/exams'
@@ -215,10 +227,18 @@ export interface RootRouteChildren {
   NoticesRoute: typeof NoticesRoute
   ResultsRoute: typeof ResultsRoute
   RoutineRoute: typeof RoutineRoute
+  SeedRoute: typeof SeedRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/seed': {
+      id: '/seed'
+      path: '/seed'
+      fullPath: '/seed'
+      preLoaderRoute: typeof SeedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/routine': {
       id: '/routine'
       path: '/routine'
@@ -357,6 +377,7 @@ const rootRouteChildren: RootRouteChildren = {
   NoticesRoute: NoticesRoute,
   ResultsRoute: ResultsRoute,
   RoutineRoute: RoutineRoute,
+  SeedRoute: SeedRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

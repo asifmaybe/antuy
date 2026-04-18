@@ -55,7 +55,7 @@ function LoginPage() {
     try {
       const profile = await login(id, password);
       clearTimeout(safetyTimer);
-      if (loginAbortRef.current) return; // Already timed out
+      if (loginAbortRef.current) return;
 
       if (profile.role === "teacher" || profile.role === "cr") {
         navigate({ to: "/admin" });
@@ -64,7 +64,7 @@ function LoginPage() {
       }
     } catch (err: unknown) {
       clearTimeout(safetyTimer);
-      if (loginAbortRef.current) return; // Already timed out
+      if (loginAbortRef.current) return;
       const message = err instanceof Error ? err.message : "Login failed";
       setError(message);
     } finally {
@@ -104,11 +104,11 @@ function LoginPage() {
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
-          <div className="flex h-20 w-20 items-center justify-center rounded-4xl bg-primary mb-4 overflow-hidden">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary mb-4 overflow-hidden">
             <img 
               src="/fpi-logo.png" 
               alt="Logo" 
-              className="h-20 w-20 object-contain"
+              className="h-12 w-12 object-contain"
             />
           </div>
           <h1 className="text-2xl font-bold">Electrial 23-24</h1>
