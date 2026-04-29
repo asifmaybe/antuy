@@ -13,6 +13,7 @@ import {
   LayoutDashboard,
 } from "lucide-react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { NotificationToggle } from "@/components/NotificationToggle";
 import { NoticesBanner } from "@/components/NoticesBanner";
 import { useLanguage } from "@/hooks/use-language";
 import { useAuth } from "@/hooks/use-auth";
@@ -30,8 +31,8 @@ export const Route = createFileRoute("/admin/")({
   component: AdminDashboard,
   head: () => ({
     meta: [
-      { title: "Admin Dashboard — EduPortal" },
-      { name: "description", content: "Admin panel for managing academic operations" },
+      { title: "Admin Dashboard — ET 23-24" },
+      { name: "description", content: "Teacher panel for managing academic operations" },
     ],
   }),
 });
@@ -117,7 +118,7 @@ function AdminDashboard() {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs text-muted-foreground">
-              {lang === "bn" ? "অ্যাডমিন প্যানেল" : "Admin Panel"}
+              {lang === "bn" ? "শিক্ষক প্যানেল" : "Teacher Panel"}
             </p>
             <h1 className="text-xl font-bold">{user?.name || "Admin"}</h1>
             <p className="text-xs text-muted-foreground capitalize">
@@ -138,6 +139,7 @@ function AdminDashboard() {
                 <LayoutDashboard className="h-4.5 w-4.5" />
               </button>
             )}
+            <NotificationToggle />
             <LanguageSwitcher />
             <button
               onClick={handleLogout}

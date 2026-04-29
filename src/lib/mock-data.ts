@@ -138,8 +138,8 @@ export const mockResults = [
 ];
 
 export const mockStudent = {
-  id: "STU001",
-  name: "Asif Ahmed",
+  id: "842943",
+  name: "ANIRBAN",
   attendancePercent: 89,
 };
 

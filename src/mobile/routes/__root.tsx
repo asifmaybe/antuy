@@ -8,8 +8,10 @@ import { Loader2 } from "lucide-react";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60, // 1 minute
+      staleTime: 1000 * 60 * 2, // 2 minutes — reduce network requests on mobile
+      gcTime: 1000 * 60 * 10, // 10 minutes — keep cache in memory longer
       retry: 1,
+      refetchOnWindowFocus: false, // Capacitor doesn't benefit from this
     },
   },
 });

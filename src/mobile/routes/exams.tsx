@@ -11,7 +11,7 @@ export const Route = createFileRoute("/exams")({
   component: ExamsPage,
   head: () => ({
     meta: [
-      { title: "Exams — EduPortal" },
+      { title: "Exams — ET 23-24" },
       { name: "description", content: "Upcoming and past exams" },
     ],
   }),

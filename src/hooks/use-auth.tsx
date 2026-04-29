@@ -18,25 +18,44 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
+/** Maximum time (ms) to wait for initial auth check before giving up */
+const AUTH_INIT_TIMEOUT_MS = 6000;
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   // Track manual login/logout in progress to avoid race with onAuthStateChange
   const manualActionRef = useRef(false);
+  // Prevent double-setting loading to false
+  const loadingResolvedRef = useRef(false);
 
   useEffect(() => {
     let mounted = true;
 
+    const resolveLoading = (profile: UserProfile | null) => {
+      if (!mounted || loadingResolvedRef.current) return;
+      loadingResolvedRef.current = true;
+      setUser(profile);
+      setLoading(false);
+    };
+
+    // Hard safety timeout — if auth check hangs (network, stale token, etc.),
+    // force loading to false so the app never stays stuck on a white screen.
+    const safetyTimer = setTimeout(() => {
+      if (!loadingResolvedRef.current) {
+        console.warn("[AuthProvider] Auth init timed out, falling back to logged-out state");
+        resolveLoading(null);
+      }
+    }, AUTH_INIT_TIMEOUT_MS);
+
     // Fetch current user on mount
     getCurrentUser()
       .then((profile) => {
-        if (mounted) setUser(profile);
+        resolveLoading(profile);
       })
-      .catch(() => {
-        if (mounted) setUser(null);
-      })
-      .finally(() => {
-        if (mounted) setLoading(false);
+      .catch((err) => {
+        console.warn("[AuthProvider] getCurrentUser failed:", err);
+        resolveLoading(null);
       });
 
     // Listen for auth changes (other tabs, token refresh, etc.)
@@ -50,6 +69,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     return () => {
       mounted = false;
+      clearTimeout(safetyTimer);
       subscription.unsubscribe();
     };
   }, []);

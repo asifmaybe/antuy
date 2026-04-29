@@ -11,7 +11,7 @@ export const Route = createFileRoute("/notices")({
   component: NoticesPage,
   head: () => ({
     meta: [
-      { title: "Notices — EduPortal" },
+      { title: "Notices — ET 23-24" },
       { name: "description", content: "Announcements and notices" },
     ],
   }),

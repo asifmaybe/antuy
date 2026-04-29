@@ -21,7 +21,7 @@ import { Label } from "@/components/ui/label";
 export const Route = createFileRoute("/admin/exams")({
   component: AdminExamsPage,
   head: () => ({
-    meta: [{ title: "Manage Exams — EduPortal Admin" }],
+    meta: [{ title: "Manage Exams — ET 23-24 Admin" }],
   }),
 });
 

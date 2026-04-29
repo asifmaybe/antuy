@@ -28,6 +28,25 @@ export default defineConfig({
   build: {
     outDir: "dist-mobile",
     emptyOutDir: true,
+    sourcemap: false,
+    // Target modern browsers for smaller bundle size
+    target: "es2020",
+    // Optimize chunk splitting for faster initial load
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "vendor-react": ["react", "react-dom"],
+          "vendor-router": ["@tanstack/react-router"],
+          "vendor-query": ["@tanstack/react-query"],
+          "vendor-supabase": ["@supabase/supabase-js"],
+          "vendor-ui": ["lucide-react", "sonner"],
+        },
+      },
+    },
+    // Reduce chunk size warnings threshold
+    chunkSizeWarningLimit: 600,
+    cssMinify: true,
+    minify: "esbuild",
   },
   server: {
     port: 5174,

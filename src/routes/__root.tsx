@@ -40,12 +40,12 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
-      { title: "EduPortal — College Academic Management" },
+      { title: "ET 23-24 — College Academic Management" },
       {
         name: "description",
         content: "Mobile-first college academic management system for students and teachers",
       },
-      { property: "og:title", content: "EduPortal — College Academic Management" },
+      { property: "og:title", content: "ET 23-24 — College Academic Management" },
       { property: "og:description", content: "Mobile-first college academic management system" },
       { property: "og:type", content: "website" },
       { name: "theme-color", content: "#16a34a" },

@@ -2,7 +2,7 @@ import type { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
   appId: "com.eduportal.app",
-  appName: "EduPortal",
+  appName: "ET 23-24",
   webDir: "dist-mobile",
   server: {
     // During development, point to Vite dev server for live reload.

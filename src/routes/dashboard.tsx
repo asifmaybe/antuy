@@ -11,6 +11,7 @@ import { BottomNav } from "@/components/BottomNav";
 import { NoticesBanner } from "@/components/NoticesBanner";
 import { NextSessionCard } from "@/components/NextSessionCard";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { NotificationToggle } from "@/components/NotificationToggle";
 import { RouteGuard } from "@/components/RouteGuard";
 import { useLanguage } from "@/hooks/use-language";
 import { useAuth } from "@/hooks/use-auth";
@@ -27,7 +28,7 @@ export const Route = createFileRoute("/dashboard")({
   component: DashboardPage,
   head: () => ({
     meta: [
-      { title: "Dashboard — EduPortal" },
+      { title: "Dashboard — ET 23-24" },
       { name: "description", content: "Your academic dashboard" },
     ],
   }),
@@ -97,11 +98,12 @@ function DashboardPage() {
                 <button
                   onClick={() => navigate({ to: "/admin" })}
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors hover:bg-primary/20"
-                  title={lang === "bn" ? "অ্যাডমিন প্যানেল" : "Admin Panel"}
+                  title={lang === "bn" ? "শিক্ষক প্যানেল" : "Teacher Panel"}
                 >
                   <ShieldAlert className="h-4.5 w-4.5" />
                 </button>
               )}
+              <NotificationToggle />
               <LanguageSwitcher />
               <button
                 onClick={handleLogout}

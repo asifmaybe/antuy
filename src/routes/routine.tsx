@@ -12,7 +12,7 @@ export const Route = createFileRoute("/routine")({
   component: RoutinePage,
   head: () => ({
     meta: [
-      { title: "Class Routine — EduPortal" },
+      { title: "Class Routine — ET 23-24" },
       { name: "description", content: "Your weekly class routine" },
     ],
   }),

@@ -151,27 +151,37 @@ export async function signOut() {
 // ── Get current user profile ──────────────────────────
 export async function getCurrentUser(): Promise<UserProfile | null> {
   try {
-    // First try getSession (reads from local storage, fast)
+    // First try getSession (reads from local storage, fast — no network)
     const {
       data: { session },
     } = await supabase.auth.getSession();
     if (!session?.user) return null;
 
-    // Then verify with getUser (hits server, slower) — with timeout
-    const {
-      data: { user },
-      error,
-    } = await withTimeout(supabase.auth.getUser(), 5000, "Get user");
-
-    if (error || !user) return null;
-
+    // Try to fetch profile using the session user ID (fast path)
+    // This avoids the slow getUser() server round-trip on cold starts
     const { data: profile } = await withTimeout(
-      supabase.from("profiles").select("*").eq("id", user.id).single(),
-      5000,
+      supabase.from("profiles").select("*").eq("id", session.user.id).single(),
+      3000,
       "Get profile",
     );
 
-    return profile;
+    if (profile) return profile;
+
+    // Fallback: verify with getUser (hits server) — with short timeout
+    const {
+      data: { user },
+      error,
+    } = await withTimeout(supabase.auth.getUser(), 3000, "Get user");
+
+    if (error || !user) return null;
+
+    const { data: verifiedProfile } = await withTimeout(
+      supabase.from("profiles").select("*").eq("id", user.id).single(),
+      3000,
+      "Get verified profile",
+    );
+
+    return verifiedProfile;
   } catch {
     // If anything fails (timeout, network), try session-only fallback
     try {
@@ -180,11 +190,11 @@ export async function getCurrentUser(): Promise<UserProfile | null> {
       } = await supabase.auth.getSession();
       if (!session?.user) return null;
 
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", session.user.id)
-        .single();
+      const { data: profile } = await withTimeout(
+        supabase.from("profiles").select("*").eq("id", session.user.id).single(),
+        2000,
+        "Fallback profile",
+      );
 
       return profile;
     } catch {
@@ -214,33 +224,4 @@ export function onAuthStateChange(callback: (user: UserProfile | null) => void) 
   });
 }
 
-// ── Demo users shown on login page ────────────────────
-export interface DemoUser {
-  id: string;
-  password: string;
-  name: string;
-  role: UserRole;
-  subject?: string;
-}
 
-export const demoUsers: DemoUser[] = [
-  {
-    id: "STU001",
-    password: "student123",
-    name: "Asif Ahmed",
-    role: "student",
-  },
-  {
-    id: "TCH001",
-    password: "teacher123",
-    name: "Mosharof Hosen",
-    role: "teacher",
-    subject: "Physics",
-  },
-  {
-    id: "843016",
-    password: "hamza3016",
-    name: "Amir Hamza",
-    role: "cr",
-  },
-];
